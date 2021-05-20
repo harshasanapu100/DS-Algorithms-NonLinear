@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp
+namespace Custom_Library
 {
     class Program
     {
