@@ -17,29 +17,28 @@ namespace ConsoleApp
                 CustomBinarySearchTree customBinarySearchTree = new CustomBinarySearchTree();
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Pushing the elements 10, 5, 15, 6, 1, 8, 12, 18, 17 to Binary Search Tree");
+                Console.WriteLine("Pushing the elements 20, 10, 30, 6, 14, 24, 3, 8, 26 to Binary Search Tree");
                 Console.ForegroundColor = ConsoleColor.White;
 
+                customBinarySearchTree.Insert(20);
                 customBinarySearchTree.Insert(10);
-                customBinarySearchTree.Insert(5);
-                customBinarySearchTree.Insert(15);
+                customBinarySearchTree.Insert(30);
                 customBinarySearchTree.Insert(6);
-                customBinarySearchTree.Insert(1);
+                customBinarySearchTree.Insert(14);
+                customBinarySearchTree.Insert(24);
+                customBinarySearchTree.Insert(3);
                 customBinarySearchTree.Insert(8);
-                customBinarySearchTree.Insert(12);
-                customBinarySearchTree.Insert(18);
-                customBinarySearchTree.Insert(6);
-                customBinarySearchTree.Insert(17);
+                customBinarySearchTree.Insert(26);
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Finding the element 15 in Binary Search Tree");
+                Console.WriteLine("Finding the element 26 in Binary Search Tree");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(customBinarySearchTree.Find(15));
+                Console.WriteLine(customBinarySearchTree.Find(26));
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Finding the element 12 in Binary Search Tree");
+                Console.WriteLine("Finding the element 24 in Binary Search Tree");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(customBinarySearchTree.Find(12));
+                Console.WriteLine(customBinarySearchTree.Find(24));
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Finding the element 20 in Binary Search Tree");
@@ -47,9 +46,27 @@ namespace ConsoleApp
                 Console.WriteLine(customBinarySearchTree.Find(20));
 
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Finding the element 6 in Binary Search Tree");
+                Console.WriteLine("Finding the element 4 in Binary Search Tree");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(customBinarySearchTree.Find(6));
+                Console.WriteLine(customBinarySearchTree.Find(4));
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Pre order Traversal results");
+                Console.ForegroundColor = ConsoleColor.White;
+                customBinarySearchTree.TraversePreOrder();
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("In order Traversal results");
+                Console.ForegroundColor = ConsoleColor.White;
+                customBinarySearchTree.TraverseInOrder();
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Post order Traversal results");
+                Console.ForegroundColor = ConsoleColor.White;
+                customBinarySearchTree.TraversePostOrder();
 
                 Console.ReadKey();
                 #endregion

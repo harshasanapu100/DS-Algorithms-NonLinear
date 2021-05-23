@@ -83,12 +83,63 @@ namespace CustomLibrary
 
             return false;
         }
+
+        public void TraversePreOrder()
+        {
+            TraversePreOrder(root);
+        }
+
+        public void TraverseInOrder()
+        {
+            TraverseInOrder(root);
+        }
+
+        public void TraversePostOrder()
+        {
+            TraversePostOrder(root);
+        }
         #endregion
 
         #region private methods
         private bool IsEmpty()
         {
             return root == null;
+        }
+
+        private static void TraversePreOrder(Node root)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            Console.WriteLine(root.value);
+            TraversePreOrder(root.leftChild);
+            TraversePreOrder(root.rightChild);
+        }
+
+        private static void TraverseInOrder(Node root)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            TraverseInOrder(root.leftChild);
+            Console.WriteLine(root.value);
+            TraverseInOrder(root.rightChild);
+        }
+
+        private static void TraversePostOrder(Node root)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            TraversePostOrder(root.leftChild);
+            TraversePostOrder(root.rightChild);
+            Console.WriteLine(root.value);
         }
         #endregion
     }
