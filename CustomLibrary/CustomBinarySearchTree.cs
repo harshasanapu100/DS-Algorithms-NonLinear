@@ -98,15 +98,35 @@ namespace CustomLibrary
         {
             TraversePostOrder(root);
         }
+
+        public int CalculateHeightOfTree()
+        {
+            return CalculateHeightOfTree(root);
+        }
+
+        public int FindMinimumValueInTree()
+        {
+            return FindMinimumValueInTree(root);
+        }
+
+        public int FindMaximumValueInTree()
+        {
+            return FindMaximumValueInTree(root);
+        }
+
+        public int FindMinimumValueInBinarySearchTree()
+        {
+            return FindMinimumValueInBinarySearchTree(root);
+        }
+
+        public int FindMaximumValueInBinarySearchTree()
+        {
+            return FindMaximumValueInBinarySearchTree(root);
+        }
         #endregion
 
         #region private methods
-        private bool IsEmpty()
-        {
-            return root == null;
-        }
-
-        private static void TraversePreOrder(Node root)
+        private void TraversePreOrder(Node root)
         {
             if (root == null)
             {
@@ -118,7 +138,7 @@ namespace CustomLibrary
             TraversePreOrder(root.rightChild);
         }
 
-        private static void TraverseInOrder(Node root)
+        private void TraverseInOrder(Node root)
         {
             if (root == null)
             {
@@ -130,7 +150,7 @@ namespace CustomLibrary
             TraverseInOrder(root.rightChild);
         }
 
-        private static void TraversePostOrder(Node root)
+        private void TraversePostOrder(Node root)
         {
             if (root == null)
             {
@@ -141,6 +161,109 @@ namespace CustomLibrary
             TraversePostOrder(root.rightChild);
             Console.WriteLine(root.value);
         }
+
+        private int CalculateHeightOfTree(Node root)
+        {
+            if (root == null)
+            {
+                return -1;
+            }
+
+            if (IsLeaf(root))
+            {
+                return 0;
+            }
+
+            int leftChildHeight = CalculateHeightOfTree(root.leftChild);
+            int rightChildHeight = CalculateHeightOfTree(root.rightChild);
+
+            return 1 + Math.Max(leftChildHeight, rightChildHeight);
+        }
+
+        private int FindMinimumValueInTree(Node root)
+        {
+            if(root == null)
+            {
+                return int.MaxValue;
+            }
+
+            if (IsLeaf(root))
+            {
+                return root.value;
+            }
+
+            int leftMiniValue = FindMinimumValueInTree(root.leftChild);
+            int rightMinValue = FindMinimumValueInTree(root.rightChild);
+
+            return Math.Min(Math.Min(leftMiniValue, rightMinValue), root.value);
+        }
+
+        private int FindMaximumValueInTree(Node root)
+        {
+            if (root == null)
+            {
+                return int.MinValue;
+            }
+
+            if (IsLeaf(root))
+            {
+                return root.value;
+            }
+
+            int leftMiniValue = FindMaximumValueInTree(root.leftChild);
+            int rightMinValue = FindMaximumValueInTree(root.rightChild);
+
+            return Math.Max(Math.Max(leftMiniValue, rightMinValue), root.value);
+        }
+
+        private int FindMinimumValueInBinarySearchTree(Node root)
+        {
+            if (root == null)
+            {
+                throw new Exception("Tree is empty");
+            }
+
+            var current = root;
+            var last = current;
+
+            while(current != null)
+            {
+                last = current;
+                current = current.leftChild;
+            }
+
+            return last.value;
+        }
+
+        private int FindMaximumValueInBinarySearchTree(Node root)
+        {
+            if (root == null)
+            {
+                throw new Exception("Tree is empty");
+            }
+
+            var current = root;
+            var last = current;
+
+            while (current != null)
+            {
+                last = current;
+                current = current.rightChild;
+            }
+
+            return last.value;
+        }
+
+        private bool IsLeaf(Node node)
+        {
+            return node.leftChild == null && node.rightChild == null;
+        }
+
+        private bool IsEmpty()
+        {
+            return root == null;
+        }
+
         #endregion
     }
 }

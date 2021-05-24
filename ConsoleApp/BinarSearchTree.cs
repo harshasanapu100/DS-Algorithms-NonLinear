@@ -68,6 +68,37 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
                 customBinarySearchTree.TraversePostOrder();
 
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Height of the tree is");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.CalculateHeightOfTree());
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Minimum value in tree is");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.FindMinimumValueInTree());
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Maximum value in tree is");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.FindMaximumValueInTree());
+
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Minimum value in Binary Search tree is");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.FindMinimumValueInBinarySearchTree());
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Maximum value in Binary Search tree is");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.FindMaximumValueInTree());
+
                 Console.ReadKey();
                 #endregion
             }
