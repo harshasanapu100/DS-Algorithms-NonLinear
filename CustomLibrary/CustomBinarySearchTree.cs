@@ -123,6 +123,16 @@ namespace CustomLibrary
         {
             return FindMaximumValueInBinarySearchTree(root);
         }
+
+        public bool Equals(CustomBinarySearchTree other)
+        {
+            if(other.root == null)
+            {
+                return false;
+            }
+
+            return Equals(root, other.root);
+        }
         #endregion
 
         #region private methods
@@ -252,6 +262,23 @@ namespace CustomLibrary
             }
 
             return last.value;
+        }
+
+        private bool Equals(Node first,Node second)
+        {
+            if(first == null && second == null)
+            {
+                return true;
+            }
+
+            if(first != null && second != null)
+            {
+                return first.value == second.value &&
+                    Equals(first.leftChild, second.leftChild) &&
+                    Equals(first.rightChild, second.rightChild);
+            }
+
+            return false;
         }
 
         private bool IsLeaf(Node node)

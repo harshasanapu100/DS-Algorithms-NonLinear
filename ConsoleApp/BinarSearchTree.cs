@@ -99,6 +99,25 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(customBinarySearchTree.FindMaximumValueInTree());
 
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Comparing two tress are equal or not");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                CustomBinarySearchTree otherBinarySearchTree = new CustomBinarySearchTree();
+
+                otherBinarySearchTree.Insert(20);
+                otherBinarySearchTree.Insert(10);
+                otherBinarySearchTree.Insert(30);
+                otherBinarySearchTree.Insert(6);
+                otherBinarySearchTree.Insert(14);
+                otherBinarySearchTree.Insert(24);
+                otherBinarySearchTree.Insert(3);
+                otherBinarySearchTree.Insert(8);
+                otherBinarySearchTree.Insert(26);
+
+                Console.WriteLine("Are both trees are equal: {0}", customBinarySearchTree.Equals(otherBinarySearchTree));
+
                 Console.ReadKey();
                 #endregion
             }
