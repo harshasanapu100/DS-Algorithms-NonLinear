@@ -116,22 +116,70 @@ namespace CustomLibrary
 
         public int FindMinimumValueInBinarySearchTree()
         {
+            if (root == null)
+            {
+                throw new Exception("Tree is empty");
+            }
+
             return FindMinimumValueInBinarySearchTree(root);
         }
 
         public int FindMaximumValueInBinarySearchTree()
         {
+            if (root == null)
+            {
+                throw new Exception("Tree is empty");
+            }
+
             return FindMaximumValueInBinarySearchTree(root);
         }
 
         public bool Equals(CustomBinarySearchTree other)
         {
-            if(other.root == null)
+            if (other.root == null)
             {
                 return false;
             }
 
             return Equals(root, other.root);
+        }
+
+        public bool IsBinarySearchTree()
+        {
+            return IsBinarySearchTree(root, int.MinValue, int.MaxValue);
+        }
+
+        public void PrintNodesAtDistance(int distance)
+        {
+            PrintNodesAtDistance(root, distance);
+        }
+
+        public void LevelOrderTraversal()
+        {
+            for (int i = 0; i <= CalculateHeightOfTree(); i++)
+            {
+                PrintNodesAtDistance(i);
+            }
+        }
+
+        public int CalculateSizeOfTree()
+        {
+            return CalculateSizeOfTree(root);
+        }
+
+        public int CalculateTotalLeaves()
+        {
+            return CalculateTotalLeaves(root);
+        }
+
+        public bool IsTreeContainsValue(int value)
+        {
+            return IsTreeContainsValue(root, value);
+        }
+
+        public bool AreSiblings(int first, int second)
+        {
+            return AreSiblings(root, first, second);
         }
         #endregion
 
@@ -192,7 +240,7 @@ namespace CustomLibrary
 
         private int FindMinimumValueInTree(Node root)
         {
-            if(root == null)
+            if (root == null)
             {
                 return int.MaxValue;
             }
@@ -228,50 +276,32 @@ namespace CustomLibrary
 
         private int FindMinimumValueInBinarySearchTree(Node root)
         {
-            if (root == null)
+            if (root.leftChild == null)
             {
-                throw new Exception("Tree is empty");
+                return root.value;
             }
 
-            var current = root;
-            var last = current;
-
-            while(current != null)
-            {
-                last = current;
-                current = current.leftChild;
-            }
-
-            return last.value;
+            return FindMinimumValueInBinarySearchTree(root.leftChild);
         }
 
         private int FindMaximumValueInBinarySearchTree(Node root)
         {
-            if (root == null)
+            if (root.rightChild == null)
             {
-                throw new Exception("Tree is empty");
+                return root.value;
             }
 
-            var current = root;
-            var last = current;
-
-            while (current != null)
-            {
-                last = current;
-                current = current.rightChild;
-            }
-
-            return last.value;
+            return FindMaximumValueInBinarySearchTree(root.rightChild);
         }
 
-        private bool Equals(Node first,Node second)
+        private bool Equals(Node first, Node second)
         {
-            if(first == null && second == null)
+            if (first == null && second == null)
             {
                 return true;
             }
 
-            if(first != null && second != null)
+            if (first != null && second != null)
             {
                 return first.value == second.value &&
                     Equals(first.leftChild, second.leftChild) &&
@@ -279,6 +309,114 @@ namespace CustomLibrary
             }
 
             return false;
+        }
+
+        private bool IsBinarySearchTree(Node root, int min, int max)
+        {
+            if (root == null)
+            {
+                return true;
+            }
+
+            if (root.value < min || root.value > max)
+            {
+                return false;
+            }
+
+            return IsBinarySearchTree(root.leftChild, min, root.value - 1)
+                && IsBinarySearchTree(root.rightChild, root.value + 1, max);
+        }
+
+        private void PrintNodesAtDistance(Node root, int distance)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            if (distance == 0)
+            {
+                Console.WriteLine(root.value);
+            }
+
+            PrintNodesAtDistance(root.leftChild, distance - 1);
+            PrintNodesAtDistance(root.rightChild, distance - 1);
+        }
+
+        private int CalculateSizeOfTree(Node root)
+        {
+            if (root == null)
+            {
+                return 0;
+            }
+
+            if (IsLeaf(root))
+            {
+                return 1;
+            }
+
+            int leftTreeSize = CalculateSizeOfTree(root.leftChild);
+            int rightTreeSize = CalculateSizeOfTree(root.rightChild);
+
+            return 1 + leftTreeSize + rightTreeSize;
+        }
+
+        private int CalculateTotalLeaves(Node root)
+        {
+            if (root == null)
+            {
+                return 0;
+            }
+
+            if (IsLeaf(root))
+            {
+                return 1;
+            }
+
+            int leftSideLeaves = CalculateTotalLeaves(root.leftChild);
+            int rightSideLeaves = CalculateTotalLeaves(root.rightChild);
+
+            return leftSideLeaves + rightSideLeaves;
+        }
+
+        private bool IsTreeContainsValue(Node root, int value)
+        {
+            if (root == null)
+            {
+                return false;
+            }
+
+            if (root.value == value)
+            {
+                return true;
+            }
+
+            bool isLeftTreeContainsValue = IsTreeContainsValue(root.leftChild, value);
+            bool isRightTreeContainsValue = IsTreeContainsValue(root.rightChild, value);
+
+            return isLeftTreeContainsValue || isRightTreeContainsValue;
+        }
+
+        private bool AreSiblings(Node root, int first, int second)
+        {
+            if (root == null)
+            {
+                return false;
+            }
+
+            if (root.leftChild != null && root.rightChild != null)
+            {
+                if (root.leftChild.value == first && root.rightChild.value == second
+                        || root.leftChild.value == second && root.rightChild.value == first)
+                {
+                    return true;
+                }
+            }
+
+            bool isLeftTreeHasSiblings = AreSiblings(root.leftChild, first, second);
+            bool isRightTreeHasSiblings = AreSiblings(root.rightChild, first, second);
+
+            return isLeftTreeHasSiblings || isRightTreeHasSiblings;
         }
 
         private bool IsLeaf(Node node)

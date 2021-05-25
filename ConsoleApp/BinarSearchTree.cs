@@ -105,7 +105,6 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
 
                 CustomBinarySearchTree otherBinarySearchTree = new CustomBinarySearchTree();
-
                 otherBinarySearchTree.Insert(20);
                 otherBinarySearchTree.Insert(10);
                 otherBinarySearchTree.Insert(30);
@@ -116,7 +115,92 @@ namespace ConsoleApp
                 otherBinarySearchTree.Insert(8);
                 otherBinarySearchTree.Insert(26);
 
-                Console.WriteLine("Are both trees are equal: {0}", customBinarySearchTree.Equals(otherBinarySearchTree));
+                bool result = customBinarySearchTree.Equals(otherBinarySearchTree);
+                Console.WriteLine("Are both trees are equal: {0}", result);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Validating the given tree is Binary Search tree or not");
+                Console.ForegroundColor = ConsoleColor.White;
+                result = customBinarySearchTree.IsBinarySearchTree();
+                Console.WriteLine("Is given tree is Binary Search tree: {0}", result);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Print the nodes from the root with distance 2");
+                Console.ForegroundColor = ConsoleColor.White;
+                customBinarySearchTree.PrintNodesAtDistance(2);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Print the nodes from the root with distance 3");
+                Console.ForegroundColor = ConsoleColor.White;
+                customBinarySearchTree.PrintNodesAtDistance(3);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Level Traversal results");
+                Console.ForegroundColor = ConsoleColor.White;
+                customBinarySearchTree.LevelOrderTraversal();
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Calculaintg the size of tree");
+                Console.ForegroundColor = ConsoleColor.White;
+                int size = customBinarySearchTree.CalculateSizeOfTree();
+                Console.WriteLine(size);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Calculaintg the total number of leaves in a tree");
+                Console.ForegroundColor = ConsoleColor.White;
+                size = customBinarySearchTree.CalculateTotalLeaves();
+                Console.WriteLine(size);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Is Tree contains value 24");
+                Console.ForegroundColor = ConsoleColor.White;
+                result = customBinarySearchTree.IsTreeContainsValue(24);
+                Console.WriteLine(result);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Is Tree contains value 30");
+                Console.ForegroundColor = ConsoleColor.White;
+                result = customBinarySearchTree.IsTreeContainsValue(30);
+                Console.WriteLine(result);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Is Tree contains value 25");
+                Console.ForegroundColor = ConsoleColor.White;
+                result = customBinarySearchTree.IsTreeContainsValue(25);
+                Console.WriteLine(result);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Is tree have siblings as 10, 30");
+                Console.ForegroundColor = ConsoleColor.White;
+                result = customBinarySearchTree.AreSiblings(10, 30);
+                Console.WriteLine(result);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Is tree have siblings as 15, 20");
+                Console.ForegroundColor = ConsoleColor.White;
+                result = customBinarySearchTree.AreSiblings(15, 20);
+                Console.WriteLine(result);
+                
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Is tree have siblings as 3, 8");
+                Console.ForegroundColor = ConsoleColor.White;
+                result = customBinarySearchTree.AreSiblings(3, 8);
+                Console.WriteLine(result);
+
+
+
 
                 Console.ReadKey();
                 #endregion
