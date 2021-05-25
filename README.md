@@ -9,6 +9,6 @@ This solution contains 2 projects
 
 If you want to run this solution lets say you want to run LinkedList funtionality, you need to do the below step
 
-a) In ConsoleApp project open DSSingleLinkedList class and rename main method to main.
+a) In ConsoleApp project open BinarSearchTree class and rename main method to main.
 
- In CustomLibrary project open SingleLinkedList class, it contains the implementaion deltails of LinkedList functionality 
+b) In CustomLibrary project open CustomBinarySearchTree class, it contains the implementaion deltails of BinarSearchTree functionality 
