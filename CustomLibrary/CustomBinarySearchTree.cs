@@ -181,6 +181,21 @@ namespace CustomLibrary
         {
             return AreSiblings(root, first, second);
         }
+
+        public bool GetAncestors(int value)
+        {
+            return GetAncestors(root, value);
+        }
+
+        public bool IsBalanced()
+        {
+            return IsBalanced(root);
+        }
+
+        public bool IsPerfect()
+        {
+            return CalculateSizeOfTree() == Math.Pow(2, CalculateHeightOfTree() + 1) - 1;
+        }
         #endregion
 
         #region private methods
@@ -417,6 +432,48 @@ namespace CustomLibrary
             bool isRightTreeHasSiblings = AreSiblings(root.rightChild, first, second);
 
             return isLeftTreeHasSiblings || isRightTreeHasSiblings;
+        }
+
+        private bool GetAncestors(Node root, int value)
+        {
+            if (root == null)
+            {
+                return false;
+            }
+
+            if (root.value == value)
+            {
+                return true;
+            }
+
+            bool isLeftTreeContainsAncestors = GetAncestors(root.leftChild, value);
+            bool isRightTreeContainsAncestors = GetAncestors(root.rightChild, value);
+
+            if (isLeftTreeContainsAncestors || isRightTreeContainsAncestors)
+            {
+                Console.WriteLine(root.value);
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsBalanced(Node root)
+        {
+            if (root == null)
+            {
+                return true;
+            }
+
+            int leftTreeHeight = CalculateHeightOfTree(root.leftChild);
+            int rightTreeHeight = CalculateHeightOfTree(root.rightChild);
+
+            int heightDifference = Math.Abs(leftTreeHeight - rightTreeHeight);
+
+            bool isLeftTreeBalanced = IsBalanced(root.leftChild);
+            bool isRightTreeBalanced = IsBalanced(root.rightChild);
+
+            return heightDifference <= 1 && isLeftTreeBalanced && isRightTreeBalanced;
         }
 
         private bool IsLeaf(Node node)

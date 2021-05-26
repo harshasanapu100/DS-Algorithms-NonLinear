@@ -199,8 +199,25 @@ namespace ConsoleApp
                 result = customBinarySearchTree.AreSiblings(3, 8);
                 Console.WriteLine(result);
 
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Get the ancestors for node 26");
+                Console.ForegroundColor = ConsoleColor.White;
+                customBinarySearchTree.GetAncestors(26);
 
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Is tree is balanced");
+                Console.ForegroundColor = ConsoleColor.White;
+                result = customBinarySearchTree.IsBalanced();
+                Console.WriteLine(result);
 
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Is tree is Perfect");
+                Console.ForegroundColor = ConsoleColor.White;
+                result = customBinarySearchTree.IsPerfect();
+                Console.WriteLine(result);
 
                 Console.ReadKey();
                 #endregion
