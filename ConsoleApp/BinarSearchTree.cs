@@ -219,6 +219,49 @@ namespace ConsoleApp
                 result = customBinarySearchTree.IsPerfect();
                 Console.WriteLine(result);
 
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding the depth of node 14");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.DepthOfNode(14));
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding the depth of node 8");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.DepthOfNode(8));
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding the depth of node 20");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.DepthOfNode(20));
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding the height of node 14");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.HeightOfANode(14));
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding the height of node 10");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.HeightOfANode(10));
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding the height of node 24");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.HeightOfANode(24));
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding the height of node 20");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(customBinarySearchTree.HeightOfANode(20));
+
+
                 Console.ReadKey();
                 #endregion
             }

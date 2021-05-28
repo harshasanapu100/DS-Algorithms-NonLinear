@@ -18,6 +18,7 @@ namespace CustomLibrary
         }
 
         private Node root;
+        private int height;
         #endregion
 
         #region public methods
@@ -196,6 +197,16 @@ namespace CustomLibrary
         {
             return CalculateSizeOfTree() == Math.Pow(2, CalculateHeightOfTree() + 1) - 1;
         }
+
+        public int DepthOfNode(int item)
+        {
+            return DepthOfANode(root, item);
+        }
+
+        public int HeightOfANode(int item)
+        {
+            return FindHeightOfANode(root, item);
+        }
         #endregion
 
         #region private methods
@@ -240,11 +251,6 @@ namespace CustomLibrary
             if (root == null)
             {
                 return -1;
-            }
-
-            if (IsLeaf(root))
-            {
-                return 0;
             }
 
             int leftChildHeight = CalculateHeightOfTree(root.leftChild);
@@ -474,6 +480,49 @@ namespace CustomLibrary
             bool isRightTreeBalanced = IsBalanced(root.rightChild);
 
             return heightDifference <= 1 && isLeftTreeBalanced && isRightTreeBalanced;
+        }
+
+        private int DepthOfANode(Node root, int item)
+        {
+            if (root == null)
+            {
+                return -1;
+            }
+
+            int dist = -1;
+
+            if ((root.value == item) || (dist = DepthOfANode(root.leftChild, item)) >= 0 || (dist = DepthOfANode(root.rightChild, item)) >= 0)
+            {
+                return dist + 1;
+            }
+
+            return dist;
+        }
+
+        private int HeightOfANode(Node root, int item)
+        {
+            if (root == null)
+            {
+                return -1;
+            }
+
+            int leftHeight = HeightOfANode(root.leftChild, item);
+            int rightHeight = HeightOfANode(root.rightChild, item);
+
+            int mainHeight = 1 + Math.Max(leftHeight, rightHeight);
+
+            if (root.value == item)
+            {
+                height = mainHeight;
+            }
+
+            return mainHeight;
+        }
+
+        private int FindHeightOfANode(Node root, int x)
+        {
+            HeightOfANode(root, x);
+            return height;
         }
 
         private bool IsLeaf(Node node)
