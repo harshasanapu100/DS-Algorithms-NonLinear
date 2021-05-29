@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CustomLibrary
 {
@@ -206,6 +207,18 @@ namespace CustomLibrary
         public int HeightOfANode(int item)
         {
             return FindHeightOfANode(root, item);
+        }
+
+        public List<int> FindLongestPathFromRootToLeaf()
+        {
+            return FindLongestPathFromRootToLeaf(root);
+        }
+
+        public List<int> GetRootToLeafSumBinaryTreePath(int sum)
+        {
+            List<int> path = new List<int>();
+            GetRootToLeafSumBinaryTreePath(root, sum, path);
+            return path;
         }
         #endregion
 
@@ -523,6 +536,62 @@ namespace CustomLibrary
         {
             HeightOfANode(root, x);
             return height;
+        }
+
+        private List<int> FindLongestPathFromRootToLeaf(Node root)
+        {
+            if (root == null)
+            {
+                List<int> output = new List<int>();
+                return output;
+            }
+
+            List<int> left = FindLongestPathFromRootToLeaf(root.leftChild);
+            List<int> right = FindLongestPathFromRootToLeaf(root.rightChild);
+
+
+            if (right.Count < left.Count)
+            {
+                left.Add(root.value);
+            }
+            else
+            {
+                right.Add(root.value);
+            }
+
+            return left.Count > right.Count ? left : right;
+        }
+
+        private bool GetRootToLeafSumBinaryTreePath(Node root, int sum, List<int> path)
+        {
+            if (root == null)
+            {
+                return false;
+            }
+
+            if (IsLeaf(root))
+            {
+                if (root.value == sum)
+                {
+                    path.Add(root.value);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            bool isLeftTreePath = GetRootToLeafSumBinaryTreePath(root.leftChild, sum - root.value, path);
+            bool isRightTreePath = GetRootToLeafSumBinaryTreePath(root.rightChild, sum - root.value, path);
+
+            if (isLeftTreePath || isRightTreePath)
+            {
+                path.Add(root.value);
+                return true;
+            }
+
+            return false;
         }
 
         private bool IsLeaf(Node node)

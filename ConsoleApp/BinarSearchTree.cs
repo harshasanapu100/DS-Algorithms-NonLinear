@@ -1,5 +1,6 @@
 ﻿using System;
 using CustomLibrary;
+using System.Collections.Generic;
 
 namespace ConsoleApp
 {
@@ -191,7 +192,7 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
                 result = customBinarySearchTree.AreSiblings(15, 20);
                 Console.WriteLine(result);
-                
+
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Is tree have siblings as 3, 8");
@@ -261,6 +262,39 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine(customBinarySearchTree.HeightOfANode(20));
 
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding the longest path from root");
+                Console.ForegroundColor = ConsoleColor.White;
+                List<int> path = customBinarySearchTree.FindLongestPathFromRootToLeaf();
+                int n = path.Count;
+                if (n > 0)
+                {
+                    Console.Write(path[n - 1]);
+                    for (int i = n - 2; i >= 0; i--)
+                    {
+                        Console.Write(" -> " + path[i]);
+                    }
+                }
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding the root to leaf sum binary tree");
+                Console.ForegroundColor = ConsoleColor.White;
+                path = customBinarySearchTree.GetRootToLeafSumBinaryTreePath(44);
+                n = path.Count;
+                if (n > 0)
+                {
+                    Console.Write(path[n - 1]);
+                    for (int i = n - 2; i >= 0; i--)
+                    {
+                        Console.Write(" -> " + path[i]);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No path to match the given sum");
+                }
 
                 Console.ReadKey();
                 #endregion
