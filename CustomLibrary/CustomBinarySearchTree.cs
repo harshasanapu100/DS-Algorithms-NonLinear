@@ -220,6 +220,16 @@ namespace CustomLibrary
             GetRootToLeafSumBinaryTreePath(root, sum, path);
             return path;
         }
+
+        public int LowestCommonAncestorInBinarySearchTree(int n1, int n2)
+        {
+            return LowestCommonAncestorInBinarySearchTree(root, n1, n2);
+        }
+
+        public int? LowestCommonAncestorInBinaryTree(int n1, int n2)
+        {
+            return LowestCommonAncestorInBinaryTree(root, n1, n2);
+        }
         #endregion
 
         #region private methods
@@ -592,6 +602,46 @@ namespace CustomLibrary
             }
 
             return false;
+        }
+
+        private int LowestCommonAncestorInBinarySearchTree(Node root, int n1, int n2)
+        {
+            if (root.value > n1 && root.value > n2)
+            {
+                return LowestCommonAncestorInBinarySearchTree(root.leftChild, n1, n2);
+            }
+
+            if (root.value < n1 && root.value < n2)
+            {
+                return LowestCommonAncestorInBinarySearchTree(root.rightChild, n1, n2);
+            }
+            else
+            {
+                return root.value;
+            }
+        }
+
+        private int? LowestCommonAncestorInBinaryTree(Node root, int n1, int n2)
+        {
+            if(root == null)
+            {
+                return null;
+            }
+
+            if (root.value == n1 || root.value == n2)
+            {
+                return root.value;
+            }
+
+            int? left = LowestCommonAncestorInBinaryTree(root.leftChild, n1, n2);
+            int? right = LowestCommonAncestorInBinaryTree(root.rightChild, n1, n2);
+
+            if (left != null && right != null)
+            {
+                return root.value;
+            }
+
+            return left != null ? left : right;
         }
 
         private bool IsLeaf(Node node)

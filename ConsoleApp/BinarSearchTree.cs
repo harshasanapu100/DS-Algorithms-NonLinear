@@ -6,7 +6,7 @@ namespace ConsoleApp
 {
     class BinarSearchTree
     {
-        static void Main(string[] args)
+        static void BinarSearchTreeMain(string[] args)
         {
             try
             {
@@ -295,6 +295,17 @@ namespace ConsoleApp
                 {
                     Console.WriteLine("No path to match the given sum");
                 }
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding the Lowest common ancestor in binary search tree");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                int ancestor = customBinarySearchTree.LowestCommonAncestorInBinarySearchTree(10, 30);
+                Console.WriteLine(ancestor);
+
+                ancestor = customBinarySearchTree.LowestCommonAncestorInBinarySearchTree(5, 7);
+                Console.WriteLine(ancestor);
 
                 Console.ReadKey();
                 #endregion
