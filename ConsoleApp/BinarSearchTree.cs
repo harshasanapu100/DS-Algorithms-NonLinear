@@ -10,7 +10,6 @@ namespace ConsoleApp
         {
             try
             {
-                #region CustomBinarySearchTree
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Implementing the Binary Search Tree with basic Operations");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -308,7 +307,6 @@ namespace ConsoleApp
                 Console.WriteLine(ancestor);
 
                 Console.ReadKey();
-                #endregion
             }
             catch (Exception ex)
             {
