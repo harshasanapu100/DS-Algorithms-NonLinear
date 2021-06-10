@@ -45,20 +45,63 @@ namespace CustomLibrary
                 root.rightChild = Insert(root.rightChild, value);
             }
 
-            root.height = 1 + Math.Max(GetHeight(root.leftChild), GetHeight(root.rightChild));
+            SetHeight(root);
 
+            return Balance(root);
+        }
+
+        private AVLNode Balance(AVLNode root)
+        {
             if (IsLeftHeavy(root))
             {
-                Console.WriteLine(root.value + " is left heavy");
+                if (GetBalanceFactor(root.leftChild) < 0)
+                {
+                    root.leftChild = RotateLeft(root.leftChild);
+                }
+                return RotateRight(root);
             }
-            else if(IsRightHeavy(root))
+            else if (IsRightHeavy(root))
             {
-                Console.WriteLine(root.value + " is right heavy");
+                if (GetBalanceFactor(root.rightChild) > 0)
+                {
+                    root.rightChild = RotateRight(root.rightChild);
+                }
+                return RotateLeft(root);
             }
 
             return root;
         }
 
+        private AVLNode RotateLeft(AVLNode root)
+        {
+            var newRoot = root.rightChild;
+
+            root.rightChild = newRoot.leftChild;
+            newRoot.leftChild = root;
+
+            SetHeight(root);
+            SetHeight(newRoot);
+
+            return newRoot;
+        }
+
+        private AVLNode RotateRight(AVLNode root)
+        {
+            var newRoot = root.leftChild;
+
+            root.leftChild = newRoot.rightChild;
+            newRoot.rightChild = root;
+
+            SetHeight(root);
+            SetHeight(newRoot);
+
+            return newRoot;
+        }
+
+        private void SetHeight(AVLNode node)
+        {
+            node.height = 1 + Math.Max(GetHeight(node.leftChild), GetHeight(node.rightChild));
+        }
         private int GetHeight(AVLNode node)
         {
             return node == null ? -1 : node.height;
