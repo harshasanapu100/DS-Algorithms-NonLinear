@@ -5,7 +5,7 @@ namespace ConsoleApp
 {
     class AVLTree
     {
-        static void Main(string[] args)
+        static void AVLTreeMain(string[] args)
         {
             try
             {
