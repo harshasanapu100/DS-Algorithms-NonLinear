@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CustomLibrary
 {
-    public class CustomHeaps
+    public class MaxHeap
     {
         #region private fields
         private int[] items;
@@ -12,7 +12,7 @@ namespace CustomLibrary
         #endregion
 
         #region constructor
-        public CustomHeaps(int capacity)
+        public MaxHeap(int capacity)
         {
             items = new int[capacity];
         }
@@ -176,11 +176,11 @@ namespace CustomLibrary
 
     public class PriorityQueueWithHeap
     {
-        public CustomHeaps customHeaps;
+        public MaxHeap customHeaps;
 
         public PriorityQueueWithHeap(int capacity)
         {
-            customHeaps = new CustomHeaps(capacity);
+            customHeaps = new MaxHeap(capacity);
         }
 
         public void Enqueue(int item)
@@ -214,16 +214,16 @@ namespace CustomLibrary
         {
             int largerIndex = index;
 
-            int leftChildIndex = index * 2 + 1;
-            if (leftChildIndex < input.Length && input[largerIndex] < input[leftChildIndex])
+            int LeftChildIndex = index * 2 + 1;
+            if (LeftChildIndex < input.Length && input[largerIndex] < input[LeftChildIndex])
             {
-                largerIndex = leftChildIndex;
+                largerIndex = LeftChildIndex;
             }
 
-            int rightChildIndex = index * 2 + 2;
-            if (rightChildIndex < input.Length && input[largerIndex] < input[rightChildIndex])
+            int RightChildIndex = index * 2 + 2;
+            if (RightChildIndex < input.Length && input[largerIndex] < input[RightChildIndex])
             {
-                largerIndex = rightChildIndex;
+                largerIndex = RightChildIndex;
             }
 
             if (index == largerIndex)
@@ -245,11 +245,11 @@ namespace CustomLibrary
 
     public class KthLargest
     {
-        CustomHeaps customHeaps;
+        MaxHeap customHeaps;
 
         public KthLargest(int capacity)
         {
-            this.customHeaps = new CustomHeaps(capacity);
+            this.customHeaps = new MaxHeap(capacity);
         }
 
         public int getKthLargest(int[] array, int k)
@@ -272,4 +272,213 @@ namespace CustomLibrary
             return customHeaps.Max();
         }
     }
+
+    public class MaxHeapCheck
+    {
+        public static bool isMaxHeap(int[] array)
+        {
+            return isMaxHeap(array, 0);
+        }
+
+        private static bool isMaxHeap(int[] array, int index)
+        {
+            var lastParentIndex = array.Length / 2 - 1;
+            if (index > lastParentIndex)
+            {
+                return true;
+            }
+
+            var LeftChildIndex = index * 2 + 1;
+            var RightChildIndex = index * 2 + 2;
+
+            var isValidParent = array[index] >= array[LeftChildIndex] && array[index] >= array[RightChildIndex];
+
+            bool isLeftSideMaxHeap = isMaxHeap(array, LeftChildIndex);
+            bool isRightSideMaxHeap = isMaxHeap(array, RightChildIndex);
+
+            return isValidParent && isLeftSideMaxHeap && isRightSideMaxHeap;
+        }
+
+        public static bool isMinHeap(int[] array)
+        {
+            return isMinHeap(array, 0);
+        }
+
+        private static bool isMinHeap(int[] array, int index)
+        {
+            var lastParentIndex = array.Length / 2 - 1;
+            if (index > lastParentIndex)
+            {
+                return true;
+            }
+
+            var LeftChildIndex = index * 2 + 1;
+            var RightChildIndex = index * 2 + 2;
+
+            var isValidParent = array[index] <= array[LeftChildIndex] && array[index] <= array[RightChildIndex];
+
+            bool isLeftSideMaxHeap = isMinHeap(array, LeftChildIndex);
+            bool isRightSideMaxHeap = isMinHeap(array, RightChildIndex);
+
+            return isValidParent && isLeftSideMaxHeap && isRightSideMaxHeap;
+        }
+    }
+
+    public class MinHeap
+    {
+        #region private fields
+        private int[] items;
+        private int size;
+        #endregion
+
+        #region constructor
+        public MinHeap(int capacity)
+        {
+            items = new int[capacity];
+        }
+        #endregion
+
+        #region public methods
+        public void Insert(int value)
+        {
+            if (IsFull())
+            {
+                throw new ArgumentException("Array index is outside of the capacity");
+            }
+
+            items[size++] = value;
+
+            BubbleUp();
+        }
+
+        public int Remove()
+        {
+            if (IsEmpty())
+            {
+                throw new Exception("Array is empty");
+            }
+
+            var root = items[0];
+            items[0] = items[--size];
+
+            BubbleDown();
+
+            return root;
+        }
+
+        public bool IsEmpty()
+        {
+            return size == 0;
+        }
+
+        public bool IsFull()
+        {
+            return size == items.Length;
+        }
+
+        public void Print()
+        {
+            for (int i = 0; i < size; i++)
+            {
+                Console.Write(items[i] + " ");
+            }
+        }
+        #endregion
+
+        #region private methods
+        private void BubbleDown()
+        {
+            var index = 0;
+            while (index <= size && !isValidParent(index))
+            {
+                var smallerChildIndex = SmallerChildIndex(index);
+                Swap(index, smallerChildIndex);
+                index = smallerChildIndex;
+            }
+        }
+
+        private void BubbleUp()
+        {
+            var index = size - 1;
+            while (index > 0 && items[index] < items[Parent(index)])
+            {
+                Swap(index, Parent(index));
+                index = Parent(index);
+            }
+        }
+
+        private int SmallerChildIndex(int index)
+        {
+            if (!HasLeftChild(index))
+            {
+                return index;
+            }
+
+            if (!HasRightChild(index))
+            {
+                return LeftChildIndex(index);
+            }
+
+            return (LeftChild(index) < RightChild(index)) ? LeftChildIndex(index) : RightChildIndex(index);
+        }
+
+        private bool HasLeftChild(int index)
+        {
+            return LeftChildIndex(index) <= size;
+        }
+
+        private bool HasRightChild(int index)
+        {
+            return RightChildIndex(index) <= size;
+        }
+
+        private bool isValidParent(int index)
+        {
+            if (!HasLeftChild(index))
+            {
+                return true;
+            }
+
+            if (!HasRightChild(index))
+            {
+                return items[index] <= LeftChild(index);
+            }
+
+            return items[index] <= LeftChild(index) && items[index] <= RightChild(index);
+        }
+
+        private int RightChild(int index)
+        {
+            return items[RightChildIndex(index)];
+        }
+
+        private int LeftChild(int index)
+        {
+            return items[LeftChildIndex(index)];
+        }
+
+        private int LeftChildIndex(int index)
+        {
+            return index * 2 + 1;
+        }
+
+        private int RightChildIndex(int index)
+        {
+            return index * 2 + 2;
+        }
+
+        private int Parent(int index)
+        {
+            return (index - 1) / 2;
+        }
+
+        private void Swap(int first, int second)
+        {
+            var temp = items[first];
+            items[first] = items[second];
+            items[second] = temp;
+        }
+        #endregion
+    }
 }
+

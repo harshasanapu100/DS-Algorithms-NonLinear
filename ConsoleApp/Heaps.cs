@@ -9,16 +9,16 @@ namespace ConsoleApp
         {
             try
             {
-                #region CustomHeaps
+                #region MaxHeap
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Implementing the Heaps with basic Operations");
+                Console.WriteLine("Implementing the MaxHeap with basic Operations");
                 Console.ForegroundColor = ConsoleColor.White;
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Pushing the elements  10, 5, 17, 25, 4, 22 to Heap");
                 Console.ForegroundColor = ConsoleColor.White;
 
-                CustomHeaps customHeaps = new CustomHeaps(6);
+                MaxHeap customHeaps = new MaxHeap(6);
 
                 customHeaps.Insert(10);
                 customHeaps.Insert(5);
@@ -56,7 +56,7 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
 
                 int[] numbers = { 8, 3, 10, 1, 4, 2, 7 };
-                CustomHeaps descending = new CustomHeaps(numbers.Length);
+                MaxHeap descending = new MaxHeap(numbers.Length);
                 foreach (var number in numbers)
                 {
                     descending.Insert(number);
@@ -82,7 +82,7 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
 
                 int[] items = { 8, 5, 3, 10, 1, 4, 2, 7 };
-                CustomHeaps ascending = new CustomHeaps(items.Length);
+                MaxHeap ascending = new MaxHeap(items.Length);
                 foreach (var item in items)
                 {
                     ascending.Insert(item);
@@ -161,8 +161,67 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
 
                 KthLargest kthLargest = new KthLargest(7);
+                input = new int[] { 5, 3, 8, 4, 1, 2, 10 };
                 int largest = kthLargest.getKthLargest(input, 2);
                 Console.WriteLine("2nd largest in array is {0}", largest);
+                #endregion
+
+                #region MaxHeapCheck
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Check whether the given heap is max heap or min heap");
+                Console.WriteLine("Input array is 5, 3, 8, 4, 1, 2, 10");
+                Console.ForegroundColor = ConsoleColor.White;
+                MaxHeapCheck maxHeapCheck = new MaxHeapCheck();
+                input = new int[] { 8, 4, 5, 3, 1, 2, 0 };
+                Console.WriteLine("Given array represents Max Heap: {0}", MaxHeapCheck.isMaxHeap(input));
+
+                input = new int[] { 0, 2, 1, 3, 5, 4, 8 };
+                Console.WriteLine("Given array represents Max Heap: {0}", MaxHeapCheck.isMinHeap(input));
+                #endregion
+
+                #region MinHeap
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Implementing the MinHeap with basic Operations");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Pushing the elements  10, 5, 17, 25, 4, 22 to Heap");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                MinHeap minHeap = new MinHeap(6);
+
+                minHeap.Insert(10);
+                minHeap.Insert(5);
+                minHeap.Insert(17);
+                minHeap.Insert(25);
+                minHeap.Insert(4);
+                minHeap.Insert(22);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Printing the elements from the heap");
+                Console.ForegroundColor = ConsoleColor.White;
+                minHeap.Print();
+                Console.WriteLine();
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("In heap we can delete only a root node. So we are deleting root node now");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                result = minHeap.Remove();
+                Console.WriteLine("Deleted root node is {0}", result);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Printing the elements from the heap");
+                Console.ForegroundColor = ConsoleColor.White;
+                minHeap.Print();
+                Console.WriteLine();
+
+                minHeap.Insert(25);
                 #endregion
             }
             catch (Exception ex)
