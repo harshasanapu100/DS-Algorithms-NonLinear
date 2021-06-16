@@ -65,6 +65,15 @@ namespace CustomLibrary
             }
         }
 
+        public int Max()
+        {
+            if (IsEmpty())
+            {
+                throw new Exception("Array is empty");
+            }
+
+            return items[0];
+        }
         #endregion
 
         #region private methods
@@ -163,7 +172,6 @@ namespace CustomLibrary
             return GetRightChildIndex(index) <= size;
         }
         #endregion
-
     }
 
     public class PriorityQueueWithHeap
@@ -188,6 +196,80 @@ namespace CustomLibrary
         public bool IsEmpty()
         {
             return customHeaps.IsEmpty();
+        }
+    }
+
+    public class HeapifyDemo
+    {
+        public static void Heapify(int[] input)
+        {
+            int lastParentIndex = input.Length / 2 - 1;
+            for (int i = lastParentIndex; i >= 0; i--)
+            {
+                Heapify(input, i);
+            }
+        }
+
+        private static void Heapify(int[] input, int index)
+        {
+            int largerIndex = index;
+
+            int leftChildIndex = index * 2 + 1;
+            if (leftChildIndex < input.Length && input[largerIndex] < input[leftChildIndex])
+            {
+                largerIndex = leftChildIndex;
+            }
+
+            int rightChildIndex = index * 2 + 2;
+            if (rightChildIndex < input.Length && input[largerIndex] < input[rightChildIndex])
+            {
+                largerIndex = rightChildIndex;
+            }
+
+            if (index == largerIndex)
+            {
+                return;
+            }
+
+            Swap(input, index, largerIndex);
+            Heapify(input, largerIndex);
+        }
+
+        private static void Swap(int[] array, int first, int second)
+        {
+            int temp = array[first];
+            array[first] = array[second];
+            array[second] = temp;
+        }
+    }
+
+    public class KthLargest
+    {
+        CustomHeaps customHeaps;
+
+        public KthLargest(int capacity)
+        {
+            this.customHeaps = new CustomHeaps(capacity);
+        }
+
+        public int getKthLargest(int[] array, int k)
+        {
+            if (k < 1 || k > array.Length)
+            {
+                throw new ArgumentException();
+            }
+
+            foreach (int item in array)
+            {
+                customHeaps.Insert(item);
+            }
+
+            for (int i = 0; i < k - 1; i++)
+            {
+                customHeaps.Remove();
+            }
+
+            return customHeaps.Max();
         }
     }
 }

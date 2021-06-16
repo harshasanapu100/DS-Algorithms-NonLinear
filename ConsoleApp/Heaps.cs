@@ -9,6 +9,7 @@ namespace ConsoleApp
         {
             try
             {
+                #region CustomHeaps
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Implementing the Heaps with basic Operations");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -97,7 +98,9 @@ namespace ConsoleApp
                     Console.Write(item + " ");
                 }
                 Console.WriteLine();
+                #endregion
 
+                #region PriorityQueueWithHeap
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Implemeting Priority Queues with Heaps");
@@ -132,6 +135,35 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
                 priorityQueueWithHeap.customHeaps.Print();
                 Console.WriteLine();
+                #endregion
+
+                #region HeapifyDemo
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Implementing Heapify method - means Transforming an array to heap inplace");
+                Console.WriteLine("Input array is 5, 3, 8, 4, 1, 2");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                int[] input = { 5, 3, 8, 4, 1, 2, 10 };
+                HeapifyDemo.Heapify(input);
+                foreach (var item in input)
+                {
+                    Console.Write(item + " ");
+                }
+                Console.WriteLine();
+                #endregion
+
+                #region KthLargest
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Finding 2nd largest element in the array");
+                Console.WriteLine("Input array is 5, 3, 8, 4, 1, 2, 10");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                KthLargest kthLargest = new KthLargest(7);
+                int largest = kthLargest.getKthLargest(input, 2);
+                Console.WriteLine("2nd largest in array is {0}", largest);
+                #endregion
             }
             catch (Exception ex)
             {
