@@ -27,6 +27,7 @@ namespace CustomLibrary
             }
 
             items[size++] = value;
+
             BubbleUp();
         }
 
@@ -63,6 +64,7 @@ namespace CustomLibrary
                 Console.Write(items[i] + " ");
             }
         }
+
         #endregion
 
         #region private methods
@@ -162,5 +164,30 @@ namespace CustomLibrary
         }
         #endregion
 
+    }
+
+    public class PriorityQueueWithHeap
+    {
+        public CustomHeaps customHeaps;
+
+        public PriorityQueueWithHeap(int capacity)
+        {
+            customHeaps = new CustomHeaps(capacity);
+        }
+
+        public void Enqueue(int item)
+        {
+            customHeaps.Insert(item);
+        }
+
+        public int Dequeue()
+        {
+            return customHeaps.Remove();
+        }
+
+        public bool IsEmpty()
+        {
+            return customHeaps.IsEmpty();
+        }
     }
 }
