@@ -273,7 +273,7 @@ namespace CustomLibrary
         }
     }
 
-    public class MaxHeapCheck
+    public class HeapCheck
     {
         public static bool isMaxHeap(int[] array)
         {

@@ -166,18 +166,18 @@ namespace ConsoleApp
                 Console.WriteLine("2nd largest in array is {0}", largest);
                 #endregion
 
-                #region MaxHeapCheck
+                #region HeapCheck
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Check whether the given heap is max heap or min heap");
                 Console.WriteLine("Input array is 5, 3, 8, 4, 1, 2, 10");
                 Console.ForegroundColor = ConsoleColor.White;
-                MaxHeapCheck maxHeapCheck = new MaxHeapCheck();
+                HeapCheck maxHeapCheck = new HeapCheck();
                 input = new int[] { 8, 4, 5, 3, 1, 2, 0 };
-                Console.WriteLine("Given array represents Max Heap: {0}", MaxHeapCheck.isMaxHeap(input));
+                Console.WriteLine("Given array represents Max Heap: {0}", HeapCheck.isMaxHeap(input));
 
                 input = new int[] { 0, 2, 1, 3, 5, 4, 8 };
-                Console.WriteLine("Given array represents Max Heap: {0}", MaxHeapCheck.isMinHeap(input));
+                Console.WriteLine("Given array represents Max Heap: {0}", HeapCheck.isMinHeap(input));
                 #endregion
 
                 #region MinHeap
