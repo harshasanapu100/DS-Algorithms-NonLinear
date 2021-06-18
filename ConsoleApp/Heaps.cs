@@ -5,7 +5,7 @@ namespace ConsoleApp
 {
     class Heaps
     {
-        static void Main(string[] args)
+        static void HeapsMain(string[] args)
         {
             try
             {
