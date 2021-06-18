@@ -58,6 +58,7 @@ namespace CustomLibrary
                 {
                     root.leftChild = RotateLeft(root.leftChild);
                 }
+
                 return RotateRight(root);
             }
             else if (IsRightHeavy(root))
@@ -66,6 +67,7 @@ namespace CustomLibrary
                 {
                     root.rightChild = RotateRight(root.rightChild);
                 }
+
                 return RotateLeft(root);
             }
 
@@ -102,6 +104,7 @@ namespace CustomLibrary
         {
             node.height = 1 + Math.Max(GetHeight(node.leftChild), GetHeight(node.rightChild));
         }
+
         private int GetHeight(AVLNode node)
         {
             return node == null ? -1 : node.height;

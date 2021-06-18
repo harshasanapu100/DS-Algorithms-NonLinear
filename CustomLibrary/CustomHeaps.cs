@@ -317,10 +317,10 @@ namespace CustomLibrary
 
             var isValidParent = array[index] <= array[LeftChildIndex] && array[index] <= array[RightChildIndex];
 
-            bool isLeftSideMaxHeap = isMinHeap(array, LeftChildIndex);
-            bool isRightSideMaxHeap = isMinHeap(array, RightChildIndex);
+            bool isLeftSideMinHeap = isMinHeap(array, LeftChildIndex);
+            bool isRightSideMinHeap = isMinHeap(array, RightChildIndex);
 
-            return isValidParent && isLeftSideMaxHeap && isRightSideMaxHeap;
+            return isValidParent && isLeftSideMinHeap && isRightSideMinHeap;
         }
     }
 
