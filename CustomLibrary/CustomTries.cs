@@ -70,6 +70,21 @@ namespace CustomLibrary
         {
             PostOrderTraversal(root);
         }
+
+        public void Remove(string word)
+        {
+            Remove(root, word, 0);
+        }
+
+        public List<string> FindWords(string prefix)
+        {
+            List<string> words = new List<string>();
+            var lastNode = FindLastNodeOfWord(prefix);
+            FindWords(lastNode, prefix, words);
+
+            return words;
+        }
+
         #endregion
 
         #region private methods
@@ -91,6 +106,71 @@ namespace CustomLibrary
             }
 
             Console.WriteLine(root.value);
+        }
+
+        private void Remove(Node root, string word, int index)
+        {
+            if (index == word.Length)
+            {
+                root.isEndOfWord = false;
+                return;
+            }
+
+            var ch = word[index];
+            var child = root.children.ContainsKey(ch) ? root.children[ch] : null;
+
+            if (child == null)
+            {
+                return;
+            }
+
+            Remove(child, word, index + 1);
+
+            if (child.children.Count == 0 && !child.isEndOfWord)
+            {
+                child.children.Remove(ch);
+            }
+        }
+
+        private Node FindLastNodeOfWord(string prefix)
+        {
+            if (prefix == null)
+            {
+                return null;
+            }
+
+            var current = root;
+
+            foreach (char ch in prefix.ToCharArray())
+            {
+                if (!current.children.ContainsKey(ch))
+                {
+                    return null;
+                }
+
+                current = current.children[ch];
+            }
+
+            return current;
+        }
+
+        private void FindWords(Node root, string prefix, List<string> words)
+        {
+            if (root == null)
+            {
+                return;
+            }
+
+            if (root.isEndOfWord)
+            {
+                words.Add(prefix);
+            }
+
+            foreach (var child in root.children)
+            {
+                FindWords(child.Value, prefix + child.Value.value, words);
+            }
+
         }
         #endregion
     }
