@@ -59,7 +59,7 @@ namespace ConsoleApp
                 Console.WriteLine("Performing search to get the list of words available for search key");
                 Console.ForegroundColor = ConsoleColor.White;
 
-                var words = customTries.FindWords(null);
+                var words = customTries.FindWords("car");
                 foreach (string item in words)
                 {
                     Console.WriteLine(item);
