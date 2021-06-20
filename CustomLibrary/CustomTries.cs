@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Linq;
 namespace CustomLibrary
 {
     public class CustomTries
@@ -61,6 +61,11 @@ namespace CustomLibrary
             return current.isEndOfWord;
         }
 
+        public bool ContainsRecursively(string word)
+        {
+            return ContainsRecursively(root, word, 0);
+        }
+
         public void PreOrderTraversal()
         {
             PreOrderTraversal(root);
@@ -83,6 +88,42 @@ namespace CustomLibrary
             FindWords(lastNode, prefix, words);
 
             return words;
+        }
+
+        public int CountWords()
+        {
+            return CountWords(root);
+        }
+
+        public string LongestCommonPrefix(string[] words)
+        {
+            if (words == null)
+            {
+                return "";
+            }
+
+            var trie = new CustomTries();
+            foreach (var word in words)
+            {
+                trie.Insert(word);
+            }
+
+            var prefix = new StringBuilder();
+            var maxChars = GetShortest(words).Length;
+            var current = trie.root;
+
+            while (prefix.Length < maxChars)
+            {
+                var children = current.children.Values;
+                if (children.Count != 1) {
+                    break;
+                }
+
+                current = children.First();
+                prefix.Append(current.value);
+            }
+
+            return prefix.ToString();
         }
 
         #endregion
@@ -166,12 +207,67 @@ namespace CustomLibrary
                 words.Add(prefix);
             }
 
-            foreach (var child in root.children)
+            foreach (KeyValuePair<char, Node> child in root.children)
             {
                 FindWords(child.Value, prefix + child.Value.value, words);
             }
 
         }
+
+        private bool ContainsRecursively(Node root, string word, int index)
+        {
+            if (index == word.Length)
+            {
+                return root.isEndOfWord;
+            }
+
+            if (root == null)
+            {
+                return false;
+            }
+
+            char ch = word[index];
+            Node child = root.children.ContainsKey(ch) ? root.children[ch] : null;
+
+            return ContainsRecursively(child, word, index + 1);
+        }
+
+        private int CountWords(Node root)
+        {
+            var total = 0;
+
+            if (root.isEndOfWord)
+            {
+                total++;
+            }
+
+            foreach (var child in root.children)
+            {
+                total += CountWords(child.Value);
+            }
+
+            return total;
+        }
+
+        private static string GetShortest(string[] words)
+        {
+            if (words == null || words.Length == 0)
+            {
+                return "";
+            }
+
+            var shortest = words[0];
+            for (var i = 1; i < words.Length; i++)
+            {
+                if (words[i].Length < shortest.Length)
+                {
+                    shortest = words[i];
+                }
+            }
+
+            return shortest;
+        }
+
         #endregion
     }
 }

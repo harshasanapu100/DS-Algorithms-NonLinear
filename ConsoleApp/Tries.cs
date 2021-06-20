@@ -20,13 +20,13 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
 
                 customTries.Insert("bat");
-                customTries.Insert("cat");
-                customTries.Insert("dog");
-                customTries.Insert("car");
-                customTries.Insert("battery");
-                customTries.Insert("catch");
-                customTries.Insert("batting");
-                customTries.Insert("care");
+                //customTries.Insert("cat");
+                //customTries.Insert("dog");
+                //customTries.Insert("car");
+                //customTries.Insert("battery");
+                //customTries.Insert("catch");
+                //customTries.Insert("batting");
+                //customTries.Insert("care");
 
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -56,6 +56,19 @@ namespace ConsoleApp
 
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Count the total number of words in trie");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Total no of words in trie are {0}", customTries.CountWords());
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Find longest common prefix in can, canada, care and cab words");
+                Console.ForegroundColor = ConsoleColor.White;
+                string[] commonWords = { "can", "canada", "care", "cab" };
+                Console.WriteLine("Longest prefix is {0}", customTries.LongestCommonPrefix(commonWords));
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Performing search to get the list of words available for search key");
                 Console.ForegroundColor = ConsoleColor.White;
 
@@ -77,7 +90,7 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
                 customTries.PostOrderTraversal();
 
-              
+
             }
             catch (Exception ex)
             {
