@@ -20,13 +20,13 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
 
                 customTries.Insert("bat");
-                //customTries.Insert("cat");
-                //customTries.Insert("dog");
-                //customTries.Insert("car");
-                //customTries.Insert("battery");
-                //customTries.Insert("catch");
-                //customTries.Insert("batting");
-                //customTries.Insert("care");
+                customTries.Insert("cat");
+                customTries.Insert("dog");
+                customTries.Insert("car");
+                customTries.Insert("battery");
+                customTries.Insert("catch");
+                customTries.Insert("batting");
+                customTries.Insert("care");
 
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
