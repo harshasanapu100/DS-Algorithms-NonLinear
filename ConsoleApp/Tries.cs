@@ -4,7 +4,7 @@ namespace ConsoleApp
 {
     class Tries
     {
-        static void Main(string[] args)
+        static void TriesMain(string[] args)
         {
             try
             {
