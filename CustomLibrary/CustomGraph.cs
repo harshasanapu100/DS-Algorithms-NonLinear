@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CustomLibrary
 {
@@ -11,7 +10,7 @@ namespace CustomLibrary
         {
             public string label;
 
-            public Node(String label)
+            public Node(string label)
             {
                 this.label = label;
             }
@@ -101,6 +100,107 @@ namespace CustomLibrary
                     edges += "]";
 
                     Console.WriteLine(kvp.Key.label + " is connected to " + edges);
+                }
+            }
+        }
+
+        public void DFSTraversalUsingRecurssion(string label)
+        {
+            Node node = nodes.ContainsKey(label) ? nodes[label] : null;
+
+            if (node == null)
+            {
+                return;
+            }
+
+            DFSTraversalUsingRecurssion(node, new HashSet<Node>());
+        }
+
+        public void DFSTraversaUsingIteration(string label)
+        {
+            Node node = nodes.ContainsKey(label) ? nodes[label] : null;
+
+            if (node == null)
+            {
+                return;
+            }
+
+            HashSet<Node> visited = new HashSet<Node>();
+
+            Stack<Node> stack = new Stack<Node>();
+            stack.Push(node);
+
+            while (stack.Count > 0)
+            {
+                var current = stack.Pop();
+
+                if (visited.Contains(current))
+                {
+                    continue;
+                }
+
+                Console.WriteLine(current.label);
+                visited.Add(current);
+
+                foreach (Node edge in adjacencyList[current])
+                {
+                    if (!visited.Contains(edge))
+                    {
+                        stack.Push(edge);
+                    }
+                }
+            }
+
+        }
+
+        public void BFSTraversaUsingIteration(string label)
+        {
+            Node node = nodes.ContainsKey(label) ? nodes[label] : null;
+
+            if (node == null)
+            {
+                return;
+            }
+
+            HashSet<Node> visited = new HashSet<Node>();
+
+            Queue<Node> queue = new Queue<Node>();
+            queue.Enqueue(node);
+
+            while (queue.Count > 0)
+            {
+                var current = queue.Dequeue();
+
+                if (visited.Contains(current))
+                {
+                    continue;
+                }
+
+                Console.WriteLine(current.label);
+                visited.Add(current);
+
+                foreach (Node edge in adjacencyList[current])
+                {
+                    if (!visited.Contains(edge))
+                    {
+                        queue.Enqueue(edge);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region private methods
+        private void DFSTraversalUsingRecurssion(Node root, HashSet<Node> visited)
+        {
+            Console.WriteLine(root.label);
+            visited.Add(root);
+
+            foreach (Node edge in adjacencyList[root])
+            {
+                if (!visited.Contains(edge))
+                {
+                    DFSTraversalUsingRecurssion(edge, visited);
                 }
             }
         }

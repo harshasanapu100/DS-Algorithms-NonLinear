@@ -15,20 +15,23 @@ namespace ConsoleApp
 
                 CustomGraph customGraph = new CustomGraph();
 
-                Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Pushing the lables A, B, C to graph");
-                Console.WriteLine("Adding edges A-->B, A-->C, B-->C, B-->A");
+                Console.WriteLine("Pushing the lables A, B, C, D, E to graph");
+                Console.WriteLine("Adding edges A-->B, B-->D, D-->C, A-->C, A-->D, B-->E");
                 Console.ForegroundColor = ConsoleColor.White;
 
                 customGraph.AddNode("A");
                 customGraph.AddNode("B");
                 customGraph.AddNode("C");
+                customGraph.AddNode("D");
+                customGraph.AddNode("E");
 
                 customGraph.AddEdge("A", "B");
+                customGraph.AddEdge("B", "D");
+                customGraph.AddEdge("D", "C");
                 customGraph.AddEdge("A", "C");
-                customGraph.AddEdge("B", "C");
-                customGraph.AddEdge("B", "A");
+                customGraph.AddEdge("A", "D");
+                customGraph.AddEdge("B", "E");
 
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
@@ -36,13 +39,33 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
                 customGraph.Print();
 
+                //Console.WriteLine();
+                //Console.ForegroundColor = ConsoleColor.Green;
+                //Console.WriteLine("Removing edge A-->B and D-->C");
+                //Console.ForegroundColor = ConsoleColor.White;
+                //customGraph.RemoveEdge("A", "B");
+                //customGraph.RemoveEdge("D", "C");
+                //customGraph.Print();
+                //customGraph.AddEdge("A", "B");
+                //customGraph.AddEdge("D", "C");
+
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Removing edge A-->B and B-->C");
+                Console.WriteLine("Perform the DFS Traversal for node  A using recurssion");
                 Console.ForegroundColor = ConsoleColor.White;
-                customGraph.RemoveEdge("A", "B");
-                customGraph.RemoveEdge("B", "C");
-                customGraph.Print();
+                customGraph.DFSTraversalUsingRecurssion("A");
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Perform the DFS Traversal for node  A using iteration");
+                Console.ForegroundColor = ConsoleColor.White;
+                customGraph.DFSTraversaUsingIteration("A");
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Perform the DFS Traversal for node  A using iteration");
+                Console.ForegroundColor = ConsoleColor.White;
+                customGraph.BFSTraversaUsingIteration("B");
             }
             catch (Exception ex)
             {
