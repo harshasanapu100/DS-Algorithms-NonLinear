@@ -39,15 +39,15 @@ namespace ConsoleApp
                 Console.ForegroundColor = ConsoleColor.White;
                 customGraph.Print();
 
-                //Console.WriteLine();
-                //Console.ForegroundColor = ConsoleColor.Green;
-                //Console.WriteLine("Removing edge A-->B and D-->C");
-                //Console.ForegroundColor = ConsoleColor.White;
-                //customGraph.RemoveEdge("A", "B");
-                //customGraph.RemoveEdge("D", "C");
-                //customGraph.Print();
-                //customGraph.AddEdge("A", "B");
-                //customGraph.AddEdge("D", "C");
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Removing edge A-->B and D-->C");
+                Console.ForegroundColor = ConsoleColor.White;
+                customGraph.RemoveEdge("A", "B");
+                customGraph.RemoveEdge("D", "C");
+                customGraph.Print();
+                customGraph.AddEdge("A", "B");
+                customGraph.AddEdge("D", "C");
 
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Green;
