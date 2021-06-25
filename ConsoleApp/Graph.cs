@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CustomLibrary;
 
 namespace ConsoleApp
@@ -66,6 +67,52 @@ namespace ConsoleApp
                 Console.WriteLine("Perform the DFS Traversal for node  A using iteration");
                 Console.ForegroundColor = ConsoleColor.White;
                 customGraph.BFSTraversaUsingIteration("B");
+
+                #region Topological Sort
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Performing topological sort");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                CustomGraph topologicalSort = new CustomGraph();
+
+                topologicalSort.AddNode("P");
+                topologicalSort.AddNode("A");
+                topologicalSort.AddNode("B");
+                topologicalSort.AddNode("X");
+
+                topologicalSort.AddEdge("A", "P");
+                topologicalSort.AddEdge("X", "A");
+                topologicalSort.AddEdge("X", "B");
+                topologicalSort.AddEdge("B", "A");
+
+                List<string> nodes = topologicalSort.TopologicalSort();
+                foreach (var item in nodes)
+                {
+                    Console.WriteLine(item);
+                }
+                #endregion
+
+                #region Cycle Detection
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Checking whether the  graph");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                CustomGraph cycleDetection = new CustomGraph();
+
+                cycleDetection.AddNode("A");
+                cycleDetection.AddNode("B");
+                cycleDetection.AddNode("C");
+                cycleDetection.AddNode("D");
+
+                cycleDetection.AddEdge("A", "D");
+                cycleDetection.AddEdge("B", "C");
+                cycleDetection.AddEdge("C", "B");
+
+                Console.WriteLine(cycleDetection.HasCycle());
+                #endregion
+
             }
             catch (Exception ex)
             {

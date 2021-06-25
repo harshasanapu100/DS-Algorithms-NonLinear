@@ -188,6 +188,50 @@ namespace CustomLibrary
                 }
             }
         }
+
+        public List<string> TopologicalSort()
+        {
+            HashSet<Node> visited = new HashSet<Node>();
+            Stack<Node> stack = new Stack<Node>();
+
+            foreach (KeyValuePair<string, Node> kvp in nodes)
+            {
+                TopologicalSort(kvp.Value, visited, stack);
+            }
+
+            List<string> sorted = new List<string>();
+            while (stack.Count != 0)
+            {
+                sorted.Add(stack.Pop().label);
+            }
+
+            return sorted;
+        }
+
+        public bool HasCycle()
+        {
+            List<Node> all = new List<Node>();
+            foreach (Node item in nodes.Values)
+            {
+                all.Add(item);
+            }
+
+            HashSet<Node> visiting = new HashSet<Node>();
+            HashSet<Node> visited = new HashSet<Node>();
+
+            while (all.Count != 0)
+            {
+                for (int i = 0; i < all.Count; i++)
+                {
+                    if (HasCycle(all[i], all, visiting, visited))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
         #endregion
 
         #region private methods
@@ -203,6 +247,53 @@ namespace CustomLibrary
                     DFSTraversalUsingRecurssion(edge, visited);
                 }
             }
+        }
+
+        private void TopologicalSort(Node node, HashSet<Node> visited, Stack<Node> stack)
+        {
+            if (visited.Contains(node))
+            {
+                return;
+            }
+
+            visited.Add(node);
+
+            foreach (Node neighbour in adjacencyList[node])
+            {
+                TopologicalSort(neighbour, visited, stack);
+            }
+
+            stack.Push(node);
+        }
+
+        private bool HasCycle(Node node, List<Node> all, HashSet<Node> visiting, HashSet<Node> visited)
+        {
+            all.Remove(node);
+            visiting.Add(node);
+
+            foreach (Node item in adjacencyList[node])
+            {
+                if (visited.Contains(item))
+                {
+                    continue;
+                }
+
+                if (visiting.Contains(item))
+                {
+                    return true;
+                }
+
+                var result = HasCycle(item, all, visiting, visited);
+                if (result)
+                {
+                    return true;
+                }
+            }
+
+            visiting.Remove(node);
+            visited.Add(node);
+
+            return false;
         }
         #endregion
     }
